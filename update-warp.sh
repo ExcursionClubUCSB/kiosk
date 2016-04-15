@@ -1,0 +1,1 @@
+cp -R ~/dev/blurcore/warp/bin/* ./

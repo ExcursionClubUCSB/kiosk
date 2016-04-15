@@ -1,0 +1,29 @@
+/
+	bess
+		../../package/bess
+		*.bess
+
+	css
+		../../package/css
+		*.css
+
+	js
+		../../package/js
+			:merge
+		*.js
+
+	html
+		:title
+			Party - Excursion Club
+		layout.html :zen
+
+
+/js/* 			:static
+
+/resource/* 	:static
+
+/db/*			:rodb(new_excursion)
+/sdb/*			:rodb(excursion_services)
+
+/welcome/*
+	:node(./welcome.js)

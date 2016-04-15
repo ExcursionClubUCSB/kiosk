@@ -1,0 +1,112 @@
+
+function KioskRfidHandler() {
+	new RfidScanner(
+		function(rfid) {
+			Idlers.notify();
+			
+			if(!/^[0-9]{10}$/.test(rfid)) return Blip.warn('Whoops! Try that again');
+			DB.get('rfid@(rfid=?)', rfid)
+			.ready(function(entries) {
+				if(!entries.length) return Blip.error('Tag was not found in the system');
+				var entry = entries[0];
+				switch(entry.table) {
+
+					// user scans their rfid tag
+					case 'user':
+						DB.get('user@m_id,fullname,email,phone,status,type,date_expires,date_joined(m_id=?)', entry.t_id)
+							.ready(function(userResults) {
+								if(!userResults.length) return nullPointer();
+								new User(userResults[0]);
+							});
+						break;
+
+					// gear gets scanned
+					case 'gear':
+						DB.get('rental@(g_id=?,status=?)', entry.t_id, '0')
+							.ready(function(rentalResults) {
+								// gear is checked out
+								if(rentalResults.length) {
+									// grab the rental row
+									var rental = rentalResults[0];
+
+									// someone is in staging zone
+									if(User()) {
+										// if this item is checked out to this user
+										if(rental.m_id == User().get('m_id')) {
+											// return the item
+											ShowRentals().returns(rental.g_id);
+										}
+										else {
+											Blip.warn('That gear is checked out to another member. \n It must be returned first');
+										}
+									}
+									// no one is in the staging zone... yet
+									else {
+										DB.get('user@(m_id=?)', rental.m_id)
+											.ready(function(userResults) {
+												if(!userResults.length) return nullPointer();
+												new User(userResults[0], function() {
+													ShowRentals().returns(rental.g_id);
+												});
+											});
+									}
+								}
+								// gear is not checked out
+								else {
+									DB.get('gear@(g_id=?)', entry.t_id)
+										.ready(function(gearResults) {
+											if(!gearResults.length) return nullPointer();
+											Rental.add(gearResults[0]);
+										});
+								}
+							});
+						break;
+
+					// rfid belongs to something else
+					default:
+						Blip.warn('What are you doing? That tag belongs to '+entry.table);
+						break;
+				}
+			});
+		}
+	);
+};
+
+$(document).ready(function() {
+
+	$(document.body).click(function() {
+		$('.selected').removeClass('selected');
+		$('.gear-remove_item').remove();
+		Idlers.notify();
+	});
+
+	$(document.body).dblclick(function() {
+		var phone = window.prompt("Enter Phone Number","8054551234");
+		DB.get('user@(phone="' + phone + '")').ready(function(ur) {new User(ur[0]);});
+	});
+
+	$(document).bind('contextmenu', function() {
+		return false;
+	});
+	
+	User('#user');
+	ShowRentals('#gear');
+	GearMenu('#gear');
+
+	Rental('#rent');
+	Approval('#approval');
+
+	// DB.get('user@(m_id=1)')
+	// 	.ready(function(ur) {
+	// 		new User(ur[0]);
+	// 	});
+
+	// DB.get('user@(fullname="")').ready(function(ur) {new User(ur[0]);});
+
+	var nullPointer = function() {
+		Blip.error('Invalid RFID Pointer! Did you hack?');
+	};
+
+	KioskRfidHandler();
+
+});

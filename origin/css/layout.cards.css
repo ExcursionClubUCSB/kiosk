@@ -1,0 +1,322 @@
+/** <csx> **/
+
+userLayout: {
+	padding: '2%',
+	split: '50%',
+},
+
+negativeOne: 0-1,
+
+user: {
+	name: {
+		color: 'mintCream',
+		fontSize: mediumLarge.fontSize,
+		textDecoration: 'underline',
+	},
+	phone: {
+		color: 'lightSkyBlue',
+		fontSize: medium.fontSize,
+	},
+	email: {
+		color: 'darkBlue',
+		fontSize: mediumSmall.fontSize,
+		textDecoration: 'underline',
+	},
+	expires: {
+		color: 'darkGray',
+		fontSize: small.fontSize,
+		fontStyle: 'italic',
+	},
+	cert: {
+		
+		paddingTop: '15pt',
+		
+		$left: '30%',
+		$inc: '20%',
+		
+		$default: {
+			visibility: 'hidden',
+			width: '64px',
+			height: '64px',
+			position: 'absolute',
+			padding: '6px',
+			borderRadius: '12px',
+		},
+		sup: {
+			left: user.cert.$left+user.cert.$inc*1,
+			marginLeft: 0 - user.cert.$default.width*0.5 - user.cert.$default.padding*0.5,
+		},
+		kayak: {
+			left: user.cert.$left+user.cert.$inc*2,
+			marginLeft: 0 - user.cert.$default.width*0.5 - user.cert.$default.padding*0.5,
+		},
+		wwk: {
+			left: user.cert.$left+user.cert.$inc*0,
+			marginLeft: 0 - user.cert.$default.width*0.5 - user.cert.$default.padding*0.5,
+		},
+		wristband: {
+			left: user.cert.$left+user.cert.$inc*negativeOne,
+			marginLeft: 0 - user.cert.$default.width*0.5 - user.cert.$default.padding*0.5,
+		},
+		$certified: {
+			visibility: 'visible',
+			border: '2px outset orange',
+			backgroundColor: 'rgba(255,255,255,0.2)',
+			opacity: 1,
+		},
+		$authorized: {
+			visibility: 'visible',
+			border: '2px outset black',
+			backgroundColor: 'rgba(255,255,255,0.2)',
+			opacity: 0.2,
+		},
+	},
+	
+	edit: {
+		icon: {
+			display: 'inline-block',
+			visibility: 'hidden',
+			
+			width: '32px',
+			height: '32px',
+			
+			marginBottom: '-7px',
+			backgroundImage: 'url("resource/edit.png")',
+		},
+		$authorized: {
+			visibility: 'visible',
+			opacity: 0.8,
+		},
+	},
+	
+	extend: {
+		icon: {
+			display: 'inline-block',
+			visibility: 'hidden',
+			
+			width: '24px',
+			height: '24px',
+			
+			marginBottom: '-5px',
+			backgroundImage: 'url("resource/extend.png")',
+		},
+		$authorized: {
+			visibility: 'visible',
+			opacity: 0.8,
+		},
+	},
+},
+
+card: {
+	
+	basic: {
+		position: 'absolute',
+		left: '5%',
+		width: '90%',
+		
+		color: 'maroon',
+		backgroundColor: 'lightSteelBlue',
+		borderRadius: '1.2em',
+		
+		zIndex: page.z.base,
+		opacity: 1,
+	},
+	
+	member: {
+		top: userLayout.padding,
+		height: userLayout.split - userLayout.padding*2,
+		cursor: 'pointer',
+		
+		$fadeOutDuration: gear.block.$fadeOutDuration,
+		transition: [
+			'opacity ',this.$fadeOutDuration,
+		],
+		
+		$active: {
+			backgroundColor: 'steelBlue',
+		},
+	},
+	
+	staff: {
+		top: userLayout.split+userLayout.padding*0.5,
+		height: 100 - userLayout.split - userLayout.padding*2,
+		cursor: 'pointer',
+		
+		$fadeOutDuration: '0.8s',
+		transition: [
+			'opacity ',this.$fadeOutDuration,
+		],
+		
+		$active: {
+			brightness: 105,
+			backgroundColor: rgb(this.brightness),
+		},
+	},
+	
+	data: {
+		user: {
+			position: 'relative',
+			top: '50%',
+			textAlign: 'center',
+			marginTop: 0-user.name.fontSize-user.phone.fontSize-user.email.fontSize,
+			padding: '12px',
+		},
+	},
+	
+	$active: {
+		color: 'white',
+		backgroundColor: 'steelBlue',
+		border: '2px solid black',
+	},
+	$error: {
+		color: 'orange',
+		backgroundColor: 'maroon',
+		border: '4px solid yellow',
+		expires: {
+			fontSize: medium.fontSize,
+		},
+	},
+	$dead: {
+		opacity: 0,
+		zIndex: page.z.base+2,
+	},
+},
+
+
+
+filler: {
+	fontSize: large.fontSize,
+	position: 'relative',
+	top: '50%',
+	height: '100%',
+	marginTop: 0 - large.fontSize,
+	
+	cursor: 'pointer',
+	
+	textAlign: 'center',
+	width: '100%',
+},
+
+
+
+/** </csx> **/
+
+
+.filler {
+	@filler;
+}
+
+
+.card-member {
+	@card.basic;
+	@card.member;
+}
+
+.card-member.active {
+	@card.$active;
+	@card.member.$active;
+}
+
+.card-member.error {
+	@card.$error;
+}
+
+.card-member.dead {
+	@card.$dead;
+}
+
+.card-member.error .user-expires {
+	@card.$error.expires;
+}
+
+
+.card-staff {
+	@card.basic;
+	@card.staff;
+}
+
+.card-staff.active {
+	@card.$active;
+	@card.staff.$active;
+}
+
+.card-staff.dead {
+	@card.$dead;
+}
+
+
+.card-data-user {
+	@card.data.user;
+}
+
+.user-name {
+	@user.name;
+}
+
+.user-phone {
+	@user.phone;
+}
+
+.user-email {
+	@user.email;
+}
+
+.user-expires {
+	@user.expires;
+}
+
+
+.user-cert {
+	@user.cert;
+}
+
+.user-cert-sup {
+	@user.cert.$default;
+	@user.cert.sup;
+}
+.user-cert-ocean-kayak {
+	@user.cert.$default;
+	@user.cert.kayak;
+}
+.user-cert-white-water-kayak {
+	@user.cert.$default;
+	@user.cert.wwk;
+}
+.user-wristband {
+	@user.cert.$default;
+	@user.cert.wristband;
+}
+
+[class|=user-cert].authorized {
+	@user.cert.$authorized;
+}
+
+[class|=user-cert].certified {
+	@user.cert.$certified;
+}
+
+.user-wristband.authorized {
+	@user.cert.$authorized;
+}
+
+.user-wristband.has {
+	@user.cert.$certified;
+}
+
+
+.edit-icon {
+	@user.edit.icon;
+}
+
+.edit-icon.authorized{
+	@user.edit.$authorized;
+}
+
+
+.extend-icon {
+	@user.extend.icon;
+}
+
+.extend-icon.authorized{
+	@user.extend.$authorized;
+}

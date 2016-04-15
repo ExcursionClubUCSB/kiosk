@@ -1,0 +1,55 @@
+/** <csx> **/
+
+message: {
+	position: 'absolute',
+	
+	width: '75%',
+	
+	left: '50%',
+	bottom: '5%',
+	
+	marginLeft: 0-this.width*0.5,
+	
+	fontSize: medium.fontSize,
+	textAlign: 'center',
+	
+	borderRadius: '1.2em',
+	border: '2px solid black',
+	
+	zIndex: page.z.front * 2,
+	
+	
+	error: {
+		color: 'white',
+		backgroundColor: 'red',
+	},
+	
+	warn: {
+		color: 'sienna',
+		backgroundColor: 'peachpuff',
+		border: '2px solid orange',
+	},
+	
+	info: {
+		color: 'darkBlue',
+		backgroundColor: 'lightBlue',
+	},
+},
+
+/** </csx> **/
+
+.message-stage {
+	@message;
+}
+
+.message-stage.error {
+	@message.error;
+}
+
+.message-stage.warn {
+	@message.warn;
+}
+
+.message-stage.info {
+	@message.info;
+}

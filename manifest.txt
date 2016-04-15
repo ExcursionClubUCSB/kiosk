@@ -1,0 +1,34 @@
+/
+	bess
+		../package/bess
+		*.bess
+
+	css
+		../package/css
+		*.css
+
+	js
+		../package/js
+			:merge
+		*.js
+
+	html
+		:title
+			Kiosk - Excursion Club
+		layout.html :zen
+
+
+/js/* 			:static
+
+/resource/* 	:static
+
+/photos/*		:static(../photos)
+
+/images/*		:static(../package/images)
+
+/db/*			:rodb(new_excursion)
+
+. /^\/data\/([a-z]+)\/([a-z]+)$/i
+	:node(../database/handler.js)
+
+/party/*			:warp(./party)

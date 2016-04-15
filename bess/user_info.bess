@@ -1,0 +1,79 @@
+
+/ .user_info_card {
+
+	display: none;
+	position: fixed;
+	z-index: 1024;
+	left: 50%;
+	margin-left: -300px;
+	top: 50%;
+	margin-top: -200px;
+
+	width: 600px;
+	height: 400px;
+
+	padding: 12px;
+	background-color: #fff;
+	border: 3px solid black;
+	
+	/ -title {
+		font-size: 24px;
+	}
+
+	/ -info {
+
+	}
+
+	/ -badges {
+		/ -icon {
+			display: inline-block;
+			margin: 4px;
+			border: 2px outset black;
+			border-radius: 12px;
+			cursor: pointer;
+
+			/ .missing {
+				/ >img {
+					opacity: 0.25;
+				}
+			}
+		}
+	}
+
+	/ -button {
+		display: inline-block;
+		position: absolute;
+		right: 10px;
+		width: 60%;
+		text-align: right;
+
+		/ -staff {
+			/ .active {
+
+				/ :after {
+					content: 'Declare inactive';
+				}
+			}
+			/ .member {
+				border: 2px outset blue;
+				border-radius: 1em;
+				background: -moz-linear-gradient(-45deg, #deefff 0%, #98bede 100%);
+				background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#deefff), color-stop(100%,#98bede));
+				background: -webkit-linear-gradient(-45deg, #deefff 0%,#98bede 100%);
+
+				/ :after {
+					content: 'Promote to Staff';
+				}
+			}
+			/ .inactive {
+				/ :after {
+					content: 'Re-activate as Staff';
+				}
+			}
+		}
+	}
+
+	/ -list {
+
+	}
+}

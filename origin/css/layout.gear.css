@@ -1,0 +1,440 @@
+/** <csx> **/
+
+block: {
+	border: '1px solid black',
+	zIndex: page.z.base,
+},
+
+blockTitle: {
+	position: 'relative',
+	
+	textAlign: 'right',
+	fontSize: mediumLarge.fontSize,
+	
+	width: '100%',
+	height: this.fontSize * 1.2,
+	
+	$borderTopWidth: '2px',
+	$border: [this.$borderTopWidth,' solid black',],
+	borderLeft: this.$border,
+	borderTop: this.$border,
+	borderRight: this.$border,
+	
+	$borderBottomWidth: '1px',
+	borderBottom: [this.$borderBottomWidth,' solid black',],
+	
+	$radius: medium.fontSize,
+	borderRadius: [this.$radius,' ',this.$radius,' ',0,' ',0,],
+	
+	$span: {
+		paddingRight: blockTitle.fontSize,
+	},
+	$button: {
+		position: 'absolute',
+		
+		width: '25%',
+		height: '100%',
+		
+		left: 0,
+		
+		fontSize: '16pt',
+		cursor: 'pointer',
+		
+		borderRadius: space(blockTitle.$radius,0,0,0),
+	},
+	
+	zIndex: page.z.block+1,
+},
+
+blockBody: {
+	borderLeft: blockTitle.$border,
+	borderBottom: blockTitle.$border,
+	borderRight: blockTitle.$border,
+	
+	position: 'relative',
+	
+	width: '100%',
+	height: '86%',
+	
+	top: 0,
+	
+	overflowY: 'scroll',
+	
+	zIndex: page.z.block,
+},
+
+
+gear: {
+	block: {
+		position: 'absolute',
+		
+		zIndex: page.z.base,
+	
+		$fadeOutDuration: '2.8s',
+		transition: [
+			'opacity ',this.$fadeOutDuration,
+		],
+		
+		$dead: {
+			opacity: 0,
+		},
+	},
+	checkedOut: {
+		width: '50%',
+		height: '90%',
+		
+		left: '2%',
+		top: '5%',
+		
+		zIndex: page.z.block+16,
+		
+		title: {
+			color: 'white',
+			backgroundColor: 'cornFlowerBlue',
+		},
+		body: {
+			backgroundColor: 'lightBlue',
+		},
+		button: {
+			backgroundImage: linearGradient('top','left','silver','0%','grey','100%'),
+			borderRight: '1px solid black',
+			
+			visibility: 'hidden',
+		},
+		auth: {
+			cursor: 'pointer',
+			backgroundColor: 'lightGreen',
+			
+			$after: {
+				content: '"check-in"',
+				position: 'absolute',
+				
+				fontSize: small.fontSize,
+				right: this.fontSize,
+				color: 'green',
+				
+				bottom: this.fontSize,
+			},
+			
+			$button: {
+				visibility: 'visible',
+			},
+		},
+	},
+	rentalCart: {
+		width: '50%',
+		height: '90%',
+		
+		left: '2%',
+		top: '5%',
+		
+		zIndex: page.z.block,
+		
+		title: {
+			backgroundColor: 'burlywood',
+		},
+		body: {
+			backgroundColor: 'lemonchiffon',
+		},
+		button: {
+			backgroundImage: linearGradient('top','left','white','0%','gold','100%'),
+		},
+	},
+	
+	image: {
+		position: 'absolute',
+		
+		$height: '100px',
+		$width: this.$height,
+		
+		left: 0,
+		top: 0,
+		
+		marginTop: '2px',
+		marginLeft: '2px',
+		
+		$borderWidth: '1px',
+		
+		$img: {
+			border: space(gear.image.$borderWidth,'solid black'),
+			borderRadius: '7px',
+			backgroundColor: 'rgba(255,255,255,0.7)',
+		},
+	},
+	
+	info: {
+		position: 'absolute',
+		
+		height: '100%',
+		
+		left: 0,
+		top: 0,
+		
+		marginLeft: gear.image.$width + gear.image.marginLeft + gear.image.$borderWidth*2,
+		paddingLeft: '5px',
+		
+		$title: {
+			fontSize: medium.fontSize,
+			color: 'maroon',
+			
+			$em: {
+				color: 'green',
+				fontWeight: 'bold',
+			},
+		},
+		
+		$subtitle: {
+			fontSize: gear.info.$title.fontSize * 0.75,
+			paddingLeft: '6px',
+			color: 'blue',
+		},
+		
+		$date: {
+			position: 'absolute',
+			top: 0,
+			right: '5%',
+		},
+	},
+	
+	
+	list: {
+		body: {
+			height: '100%',
+			overflowY: 'scroll',
+		},
+		item: {
+			width: '90%',
+			cursor: 'pointer',
+		},
+	},
+	
+	
+	item: {
+		position: 'relative',
+		
+		height: gear.image.$height + gear.image.marginTop*2 + gear.image.$borderWidth*2,
+		width: '100%',
+		
+		$border: '1px solid black',
+		borderBottom: this.$border,
+	},
+	
+	browser: {
+		position: 'absolute',
+		
+		width: '90%',
+		height: '80%',
+		
+		left: '5%',
+		top: blockTitle.height,
+		
+		marginTop: blockTitle.$borderTopWidth + blockTitle.$borderBottomWidth,
+		
+		overflowY: 'scroll',
+		
+		backgroundColor: 'whiteSmoke',
+		
+		zIndex: page.z.block+8,
+		
+		boxShadow: '3px 7px 5px 5px rgba(0,0,0,0.8)',
+		
+		item: {
+			padding: '5pt',
+			borderBottom: '1px solid black',
+			cursor: 'pointer',
+			
+			$hover: {
+				backgroundColor: 'lightBlue',
+			},
+		},
+	},
+},
+
+checkout: {
+	position: 'absolute',
+	
+	width: '40%',
+	height: '60%',
+	
+	top: '5%',
+	right: '3%',
+	
+	color: 'white',
+	
+	fontSize: large.fontSize,
+	border: '2px dashed black',
+	borderRadius: '12px',
+	paddingBottom: '5%',
+	cursor: 'pointer',
+	
+	backgroundImage: linearGradient('top','left','lightGreen','0%','limeGreen','100%'),
+	
+	date: {
+		top: '70%',
+		height: '125px',
+		color: 'black',
+		background: 'none',
+	},
+},
+
+finish: {
+	position: 'absolute',
+	
+	width: '40%',
+	height: '60%',
+	
+	top: '5%',
+	right: '3%',
+	
+	color: 'black',
+	
+	fontSize: large.fontSize,
+	border: '2px dashed black',
+	borderRadius: '12px',
+	paddingBottom: '5%',
+	cursor: 'pointer',
+	
+	backgroundImage: linearGradient('top','left','lightYellow','0%','orange','100%'),
+},
+
+
+
+/** </csx> **/
+
+.checked-out {
+	@gear.block;
+	@gear.checkedOut;
+}
+.checked-out.dead {
+	@gear.block.$dead;
+}
+.checked-out-title {
+	@blockTitle;
+	@gear.checkedOut.title;
+}
+.checked-out-title>span {
+	@blockTitle.$span;
+}
+.checked-out-title>button {
+	@blockTitle.$button;
+	@gear.checkedOut.button;
+}
+.checked-out-body {
+	@blockBody;
+	@gear.checkedOut.body;
+}
+
+
+.checked-out.authorized .checked-out-title>button {
+	@gear.checkedOut.auth.$button;
+}
+.checked-out.authorized .gear-item:hover {
+	@gear.checkedOut.auth;
+}
+.checked-out.authorized .gear-item:hover:after {
+	@gear.checkedOut.auth.$after;
+}
+
+.rental-cart {
+	@gear.block;
+	@gear.rentalCart;
+}
+.rental-cart.dead {
+	@gear.block.$dead;
+}
+.rental-cart-title {
+	@blockTitle;
+	@gear.rentalCart.title;
+}
+.rental-cart-title>span {
+	@blockTitle.$span;
+}
+.rental-cart-title>button {
+	@blockTitle.$button;
+	@gear.rentalCart.button;
+}
+.rental-cart-body {
+	@blockBody;
+	@gear.rentalCart.body;
+}
+
+
+.gear-list-body {
+	@gear.list.body;
+}
+
+.gear-list-item {
+	@gear.list.item;
+}
+
+.gear-list-item:hover {
+	background-color: rgba(128,220,32,0.3);
+}
+.gear-list-item:hover:after {
+	content: 'view member';
+	position: absolute;
+	right: 5%;
+	bottom: 10%;
+	font-size: 15pt;
+	color: green;
+}
+
+
+.gear-item {
+	@gear.item;
+}
+.item-image {
+	@gear.image;
+}
+.item-image>img {
+	@gear.image.$img;
+}
+.item-info {
+	@gear.info;
+}
+
+.item-info-title {
+	@gear.info.$title;
+}
+.item-info-title>em {
+	@gear.info.$title.$em;
+}
+.item-info-subtitle {
+	@gear.info.$subtitle;
+}
+.item-info-date {
+	@gear.info.$date;
+}
+
+
+.gear-list-item > .item-info-user {
+	font-size: 19pt;
+	color: navy;
+}
+
+
+.gear-browser {
+	@gear.browser;
+}
+
+.gear-browser-item {
+	@gear.browser.item;
+}
+
+.gear-browser-item:hover {
+	@gear.browser.item.$hover;
+}
+
+.checkout {
+	@checkout;
+}
+
+.checkout.date {
+	@checkout.date;
+}
+
+.finish {
+	@finish;
+}
+
+

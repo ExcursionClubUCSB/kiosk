@@ -1,0 +1,133 @@
+/** <csx> **/
+
+memberSearch: {
+	
+	width: '100%',
+	height: '100%',
+	
+	textAlign: 'center',
+	
+	input: {
+		position: 'relative',
+		
+		width: '90%',
+		
+		top: '15%',
+		
+		fontSize: mediumSmall.fontSize,
+		marginTop: 0-this.fontSize,
+		
+		textAlign: 'center',
+		
+		empty: {
+			color: 'rgba(128,128,128,0.7)',
+		},
+	},
+},
+
+searchResults: {
+	position: 'absolute',
+	
+	width: memberSearch.input.width,
+	height: '74%',
+	
+	$rleft: 100-memberSearch.input.width,
+	left: this.$rleft * 0.5,
+	top: memberSearch.input.top,
+	
+	marginTop: 0-memberSearch.input.marginTop * 0.5,
+	
+	paddingLeft: '2pt',
+	
+	fontSize: small.fontSize,
+	color: 'black',
+	backgroundColor: 'white',
+	textAlign: 'left',
+	overflow: 'hidden',
+	
+	cursor: 'pointer',
+	
+	item: {
+		
+		overflow: 'hidden',
+		
+		block: {
+			position: 'relative',
+			left: 0,
+		},
+		
+		name: {
+			display: '-moz-inline-box',
+			position: 'relative',
+			width: '34%',
+			left: 0,
+		},
+		email: {
+			position: 'absolute',
+			width: '41%',
+			left: '34%',
+			borderLeft: '1px solid black',
+			paddingLeft: '5pt',
+		},
+		phone: {
+			position: 'absolute',
+			width: '22%',
+			left: '77%',
+			borderLeft: '1px solid black',
+			paddingLeft: '3pt',
+		},
+		
+		$hover: {
+			backgroundColor: 'antiquewhite',
+		},
+		
+		$em: {
+			color: 'white',
+			backgroundColor: 'lightseagreen',
+			fontStyle: 'normal',
+		},
+	},
+},
+
+/** </csx> **/
+
+.member-search {
+	@memberSearch;
+}
+
+.member-search>input {
+	@memberSearch.input;
+}
+
+.member-search>input.empty {
+	@memberSearch.input.empty;
+}
+
+.member-search-results {
+	@searchResults;
+}
+
+.member-search-results-item {
+	@searchResults.item.block;
+}
+
+.member-search-results-item em {
+	@searchResults.item.$em;
+}
+
+.member-search-results-item:hover {
+	@searchResults.item.$hover;
+}
+
+.search-item-name {
+	@searchResults.item;
+	@searchResults.item.name;
+}
+.search-item-email {
+	@searchResults.item;
+	@searchResults.item.email;
+}
+.search-item-phone {
+	@searchResults.item;
+	@searchResults.item.phone;
+}

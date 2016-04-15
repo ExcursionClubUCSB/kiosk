@@ -1,0 +1,57 @@
+/** <csx> **/
+
+standard: {
+	fontFamily: 'arial',
+	fontSize: '24pt',
+	backgroundColor: 'whitesmoke',
+	color: 'maroon',
+},
+
+small: {
+	fontSize: standard.fontSize*0.6,
+},
+
+mediumSmall: {
+	fontSize: standard.fontSize*0.8,
+},
+
+medium: {
+	fontSize: standard.fontSize*1.0,
+},
+
+mediumLarge: {
+	fontSize: standard.fontSize*1.4,
+},
+
+large: {
+	fontSize: standard.fontSize*1.6,
+},
+
+page: {
+	split: '38%',
+	z: {
+		front: 128,
+		base: 32,
+		block: 16,
+	},
+},
+
+all_divs: {
+	userSelect: 'none',
+},
+
+fixedTall: {
+	position: 'fixed',
+	top: 0,
+	height: '85%',
+},
+
+/** </csx> **/
+
+body {
+	@standard;
+}
+
+div:not(input) {
+	@all_divs;
+}

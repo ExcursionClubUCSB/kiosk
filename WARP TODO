@@ -1,0 +1,13 @@
+WARP TODO
+
+turn server cache into array
+	jsperf to check method for removing items when buffer is full
+
+cache directory scans?
+
+develop with ability to handle external warp directory under same server
+
+integrate (static, node, warp) handlers into warp.js
+
+closure-compiler source warp.js file
+

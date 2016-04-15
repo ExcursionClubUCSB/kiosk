@@ -1,0 +1,32 @@
+/** <csx> **/
+
+
+userBlock: {
+	left: 0,
+	width: page.split,
+},
+
+actionBlock: {
+	left: page.split,
+	width: 100 - page.split,
+},
+
+/** </csx> **/
+
+.user_block {
+	@fixedTall;
+	@userBlock;
+	@block;
+}
+
+.action_block {
+	@fixedTall;
+	@actionBlock;
+	@block;
+}
+
+.curtain {
+	@fixedTall;
+	@curtain;
+}
+
